@@ -1,3 +1,5 @@
+import geojsonvt from "geojson-vt";
+
 L.GeoJSON.VT = L.GridLayer.extend({
   options: {
     async: false,
@@ -32,7 +34,10 @@ L.GeoJSON.VT = L.GridLayer.extend({
     var typeChanged = type !== feature.type,
       type = feature.type;
     ctx.beginPath();
-    if (this.options.style) this.options.style instanceof Function ? this.setStyle(ctx, this.options.style(feature.tags)) : this.setStyle(ctx, this.options.style);
+    if (this.options.style)
+      this.options.style instanceof Function
+        ? this.setStyle(ctx, this.options.style(feature.tags))
+        : this.setStyle(ctx, this.options.style);
     if (type === 2 || type === 3) {
       for (var j = 0; j < feature.geometry.length; j++) {
         var ring = feature.geometry[j];
