@@ -81,8 +81,8 @@ L.GeoJSON.VT = L.GridLayer.extend({
   setOpacity: function (color, opacity) {
     if (opacity) {
       var color = color || "#03f";
-      if (color.iscolorHex()) {
-        var colorRgb = color.colorRgb();
+      if (iscolorHex(color)) {
+        var colorRgb = getRgbColor(color);
         return (
           "rgba(" +
           colorRgb[0] +
@@ -107,14 +107,14 @@ L.geoJson.vt = function (geojson, options) {
   return new L.GeoJSON.VT(geojson, options);
 };
 
-String.prototype.iscolorHex = function () {
-  var sColor = this.toLowerCase();
+const iscolorHex = function (colorString) {
+  var sColor = colorString.toLowerCase();
   var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
   return reg.test(sColor);
 };
 
-String.prototype.colorRgb = function () {
-  var sColor = this.toLowerCase();
+const getRgbColor = function (colorString) {
+  var sColor = colorString.toLowerCase();
   if (sColor.length === 4) {
     var sColorNew = "#";
     for (var i = 1; i < 4; i += 1) {
